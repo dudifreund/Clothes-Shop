@@ -41,3 +41,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Floor and walls
+    uniqueID: 1254335645
+    locked: 0
+  - name: Items
+    uniqueID: 2567337641
+    locked: 0
+  - name: NPC
+    uniqueID: 2122135873
+    locked: 0
+  - name: Counter
+    uniqueID: 295209595
+    locked: 0
+  - name: Player
+    uniqueID: 4113259973
+    locked: 0
