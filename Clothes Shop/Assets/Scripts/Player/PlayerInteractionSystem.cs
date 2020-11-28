@@ -13,8 +13,19 @@ public class PlayerInteractionSystem : MonoBehaviour
         {
             if (currentInteractable == null) { return; }
 
-            if (currentInteractable.GetInteractionDirection() != movement.GetCurrentDirection()) { return; }
+            bool isInRightDirection = false;
+            foreach (Vector2 interactionDirection in currentInteractable.GetInteractionDirections())
+            {
+                Debug.Log("checked");
+                if (interactionDirection == movement.GetCurrentDirection())
+                {
+                    isInRightDirection = true;
+                    break;
+                }
+            }
 
+            if (!isInRightDirection) { return; }
+            
             currentInteractable.Interact();
         }
     }

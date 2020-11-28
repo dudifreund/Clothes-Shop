@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    [SerializeField] private Vector2 interactionDirection;
+    [SerializeField] private Vector2[] interactionDirections;
     
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -23,9 +23,9 @@ public class Interactable : MonoBehaviour
         }
     }
 
-    public Vector2 GetInteractionDirection()
+    public Vector2[] GetInteractionDirections()
     {
-        return interactionDirection;
+        return interactionDirections;
     }
 
     public virtual void Interact()

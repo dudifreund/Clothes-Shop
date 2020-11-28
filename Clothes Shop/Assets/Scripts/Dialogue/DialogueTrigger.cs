@@ -20,7 +20,6 @@ public class DialogueTrigger : MonoBehaviour
                 dialogue.hasStarted = false;
             }
         }
-        
     }
 
     public void EndDialogue()
