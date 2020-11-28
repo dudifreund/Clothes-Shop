@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class NPC : Interactable
 {
+    [SerializeField] DialogueTrigger dialogueTrigger;
+
     public override void Interact()
     {
-        // start dialogue with NPC
-        Debug.Log("Hi there!");
+        dialogueTrigger.TriggerDialogue();
     }
 }
