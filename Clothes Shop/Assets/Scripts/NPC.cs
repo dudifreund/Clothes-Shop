@@ -10,4 +10,9 @@ public class NPC : Interactable
     {
         dialogueTrigger.TriggerDialogue();
     }
+
+    public override void EndInteraction()
+    {
+        dialogueTrigger.EndDialogue();
+    }
 }

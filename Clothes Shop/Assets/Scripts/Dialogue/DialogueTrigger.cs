@@ -22,4 +22,10 @@ public class DialogueTrigger : MonoBehaviour
         }
         
     }
+
+    public void EndDialogue()
+    {
+        dialogue.hasStarted = false;
+        FindObjectOfType<DialogueManager>().EndDialogue();
+    }
 }

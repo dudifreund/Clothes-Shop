@@ -19,6 +19,7 @@ public class Interactable : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.GetComponent<PlayerInteractionSystem>().ResetCurrentInteractable();
+            EndInteraction();
         }
     }
 
@@ -28,6 +29,11 @@ public class Interactable : MonoBehaviour
     }
 
     public virtual void Interact()
+    {
+        // Will be overridden
+    }
+
+    public virtual void EndInteraction()
     {
         // Will be overridden
     }

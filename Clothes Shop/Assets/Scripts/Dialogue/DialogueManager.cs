@@ -62,7 +62,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    private void EndDialogue()
+    public void EndDialogue()
     {
         StopAllCoroutines();
         animator.SetBool("isShown", false);
