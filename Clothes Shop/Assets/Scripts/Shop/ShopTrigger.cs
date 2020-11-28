@@ -5,6 +5,7 @@ using UnityEngine;
 public class ShopTrigger : MonoBehaviour
 {
     [SerializeField] private ClothingItem[] clothes;
+    [SerializeField] private PopupManager popupManager;
     
     private bool isOpen = false;
     
@@ -19,16 +20,20 @@ public class ShopTrigger : MonoBehaviour
             CloseShop();
         }
     }
-
+    
     private void OpenShop()
     {
+        if (popupManager.GetIsPopupOpen()) { return; }
+
         isOpen = true;
+        popupManager.SetIsPopupOpen(true);
         FindObjectOfType<ShopManager>().OpenShop(clothes);
     }
 
     public void CloseShop()
     {
         isOpen = false;
+        popupManager.SetIsPopupOpen(false);
         FindObjectOfType<ShopManager>().CloseShop();
     }
 }

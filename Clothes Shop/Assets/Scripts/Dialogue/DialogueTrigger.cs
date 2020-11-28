@@ -5,6 +5,7 @@ using UnityEngine;
 public class DialogueTrigger : MonoBehaviour
 {
     [SerializeField] private Dialogue dialogue;
+    [SerializeField] private PopupManager popupManager;
 
     private DialogueManager dialogueManager;
 
@@ -15,6 +16,8 @@ public class DialogueTrigger : MonoBehaviour
 
     public void TriggerDialogue()
     {
+        if (popupManager.GetIsPopupOpen()) { return; }
+
         if(!dialogueManager.hasStarted)
         {
             dialogueManager.StartDialogue(dialogue);

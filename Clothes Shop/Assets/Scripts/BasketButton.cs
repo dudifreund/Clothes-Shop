@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 public class BasketButton : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField] ShopManager shopManager;
+    [SerializeField] private PopupManager popupManager;
 
     private bool isOpen = false;
 
@@ -19,12 +20,16 @@ public class BasketButton : MonoBehaviour, IPointerDownHandler
     {
         if (!isOpen)
         {
+            if (popupManager.GetIsPopupOpen()) { return; }
+
             isOpen = true;
+            popupManager.SetIsPopupOpen(true);
             shopManager.OpenBasket();
         }
         else
         {
             isOpen = false;
+            popupManager.SetIsPopupOpen(false);
             shopManager.CloseBasket();
         }
     }

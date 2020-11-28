@@ -304,6 +304,7 @@ MonoBehaviour:
   - itemName: Gray Shirt
     itemIcon: {fileID: 1231205178643357000, guid: 01da5ca26606a9947911038b673d6a40, type: 3}
     itemPrice: 40
+  popupManager: {fileID: 1274603923}
 --- !u!1 &156098366
 GameObject:
   m_ObjectHideFlags: 0
@@ -464,6 +465,7 @@ MonoBehaviour:
     sentences:
     - Hi there!
     - How can I help you?
+  popupManager: {fileID: 1274603923}
 --- !u!1 &164438079
 GameObject:
   m_ObjectHideFlags: 0
@@ -2348,6 +2350,7 @@ GameObject:
   - component: {fileID: 1274603921}
   - component: {fileID: 1274603920}
   - component: {fileID: 1274603919}
+  - component: {fileID: 1274603923}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2440,6 +2443,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1274603923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274603918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e16f9188f1f89a4ab64597d06eb997c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1277070512
 GameObject:
   m_ObjectHideFlags: 0
@@ -2609,21 +2624,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1619486905}
-        m_TargetAssemblyTypeName: PlayerInteractionSystem, Assembly-CSharp
-        m_MethodName: SetIsUIShown
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1619486902}
-        m_TargetAssemblyTypeName: Movement, Assembly-CSharp
-        m_MethodName: SetIsUIShown
+      - m_Target: {fileID: 1274603923}
+        m_TargetAssemblyTypeName: PopupManager, Assembly-CSharp
+        m_MethodName: SetIsPopupOpen
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2761,6 +2764,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shopManager: {fileID: 2012419973}
+  popupManager: {fileID: 1274603923}
 --- !u!1 &1426289509
 GameObject:
   m_ObjectHideFlags: 0
@@ -5311,6 +5315,7 @@ MonoBehaviour:
   movementSpeed: 5
   rb: {fileID: 1619486903}
   animator: {fileID: 1619486904}
+  popupManager: {fileID: 1274603923}
 --- !u!50 &1619486903
 Rigidbody2D:
   serializedVersion: 4
@@ -6249,6 +6254,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerState: {fileID: 1619486907}
+  popupManager: {fileID: 1274603923}
 --- !u!114 &1902564730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6459,6 +6465,7 @@ MonoBehaviour:
   feedbackText: {fileID: 2085410897}
   playerInteractionSystem: {fileID: 1619486905}
   movement: {fileID: 1619486902}
+  popupManager: {fileID: 1274603923}
 --- !u!4 &2012419974
 Transform:
   m_ObjectHideFlags: 0

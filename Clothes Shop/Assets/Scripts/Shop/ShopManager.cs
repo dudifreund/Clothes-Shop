@@ -17,6 +17,7 @@ public class ShopManager : MonoBehaviour
     [SerializeField] TMP_Text feedbackText;
     [SerializeField] private PlayerInteractionSystem playerInteractionSystem;
     [SerializeField] private Movement movement;
+    [SerializeField] private PopupManager popupManager;
     
     public event Action<int> OnBasketUpdated;
     
@@ -116,8 +117,7 @@ public class ShopManager : MonoBehaviour
         if (basket.Count == 0)
         {
             feedbackPopoup.SetActive(true);
-            playerInteractionSystem.SetIsUIShown(true);
-            movement.SetIsUIShown(true);
+            popupManager.SetIsPopupOpen(true);
             feedbackText.text = "You have no items in your basket";
             return;
         }
@@ -125,8 +125,7 @@ public class ShopManager : MonoBehaviour
         if (playerState.GetPlayerMoney() < basketTotalPrice)
         {
             feedbackPopoup.SetActive(true);
-            playerInteractionSystem.SetIsUIShown(true);
-            movement.SetIsUIShown(true);
+            popupManager.SetIsPopupOpen(true);
             feedbackText.text = "You don't have enough money";
             return;
         }
@@ -134,8 +133,7 @@ public class ShopManager : MonoBehaviour
         playerState.AddPlayerMoney(-basketTotalPrice);
 
         feedbackPopoup.SetActive(true);
-        playerInteractionSystem.SetIsUIShown(true);
-        movement.SetIsUIShown(true);
+        popupManager.SetIsPopupOpen(true);
         feedbackText.text = "Successfully purchased!";
         
         foreach (ClothingItem item in basket)

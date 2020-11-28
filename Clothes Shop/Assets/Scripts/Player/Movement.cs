@@ -8,11 +8,11 @@ public class Movement : MonoBehaviour
     [SerializeField] private float movementSpeed = 5f;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Animator animator;
+    [SerializeField] private PopupManager popupManager;
 
     private Vector2 currentMovement;
     private Vector2 currentDirection = new Vector2(0f, -1f);
     private bool isWalking = false;
-    private bool isUIShown = false;
     
     private void Update()
     {
@@ -26,7 +26,7 @@ public class Movement : MonoBehaviour
 
     private void GetInput()
     {
-        if (isUIShown) { return; }
+        if (popupManager.GetIsPopupOpen()) { return; }
 
         currentMovement.x = Input.GetAxisRaw("Horizontal");
         currentMovement.y = Input.GetAxisRaw("Vertical");
@@ -61,17 +61,13 @@ public class Movement : MonoBehaviour
 
     private void Move()
     {
-        if (isUIShown) { return; }
+        if (popupManager.GetIsPopupOpen()) { return; }
+
         rb.MovePosition(rb.position + currentMovement * movementSpeed * Time.fixedDeltaTime); 
     }
 
     public Vector2 GetCurrentDirection()
     {
         return currentDirection;
-    }
-
-    public void SetIsUIShown(bool value)
-    {
-        isUIShown = value;
     }
 }
