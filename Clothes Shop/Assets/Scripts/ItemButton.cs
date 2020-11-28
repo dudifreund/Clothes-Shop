@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ItemButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class ItemButton : MonoBehaviour, IPointerDownHandler
 {
     private ShopManager shopManager;
     private ClothingItem clothingItem;
@@ -18,11 +18,6 @@ public class ItemButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         shopManager.AddItemToBasket(clothingItem);
     }
     
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        //Debug.Log("You have unclicked the button " + name);
-    }
-
     public void SetClothingItem(ClothingItem clothingItemToSet)
     {
         clothingItem = clothingItemToSet;

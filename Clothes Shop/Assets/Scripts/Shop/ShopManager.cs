@@ -7,9 +7,13 @@ using UnityEngine.UI;
 
 public class ShopManager : MonoBehaviour
 {
-    [SerializeField] private Animator animator;
-    [SerializeField] GameObject itemPrefab;
+    [SerializeField] private Animator shopAnimator;
+    [SerializeField] private Animator basketAnimator;
     [SerializeField] Transform shopBoxContentTransform;
+    [SerializeField] Transform basketBoxContentTransform;
+    [SerializeField] GameObject itemPrefab;
+
+    public event Action<int> OnBasketUpdated;
     
     private PlayerState playerState;
 
@@ -23,14 +27,14 @@ public class ShopManager : MonoBehaviour
     
     public void OpenShop(ClothingItem[] clothes)
     {
-        animator.SetBool("isShown", true);
+        shopAnimator.SetBool("isShown", true);
 
-        ClearItems();
+        ClearItemsInShop();
 
-        PopulateItems(clothes);
+        PopulateItemsInShop(clothes);
     }
-
-    private void ClearItems()
+    
+    private void ClearItemsInShop()
     {
         foreach (Transform item in shopBoxContentTransform)
         {
@@ -38,7 +42,7 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    private void PopulateItems(ClothingItem[] clothes)
+    private void PopulateItemsInShop(ClothingItem[] clothes)
     {
         foreach (ClothingItem item in clothes)
         {
@@ -50,12 +54,52 @@ public class ShopManager : MonoBehaviour
             itemUI.GetpriceText().text = item.itemPrice.ToString();
         }
     }
-    
+
     public void CloseShop()
     {
-        animator.SetBool("isShown", false);
+        shopAnimator.SetBool("isShown", false);
     }
 
+    public void OpenBasket()
+    {
+        basketAnimator.SetBool("isShown", true);
+
+        ClearItemsInBasket();
+
+        PopulateItemsInBasket();
+    }
+
+    private void ClearItemsInBasket()
+    {
+        foreach (Transform item in basketBoxContentTransform)
+        {
+            GameObject.Destroy(item.gameObject);
+        }
+    }
+
+    private void PopulateItemsInBasket()
+    {
+        foreach (ClothingItem item in basket)
+        {
+            GameObject instantiatedItem = Instantiate(itemPrefab, Vector3.zero, Quaternion.identity);
+            instantiatedItem.transform.SetParent(basketBoxContentTransform);
+            ItemButton itemButton = instantiatedItem. GetComponent<ItemButton>();
+            Destroy(itemButton);
+            ItemUI itemUI = instantiatedItem.transform.GetComponent<ItemUI>();
+            itemUI.GetImageComponent().sprite = item.itemIcon;
+            itemUI.GetpriceText().text = item.itemPrice.ToString();
+        }
+    }
+
+    public void CloseBasket()
+    {
+        basketAnimator.SetBool("isShown", false);
+
+        //ClearItemsInBasket();
+
+        //PopulateItemsInBasket(clothes);
+    }
+    
     public void AddItemToBasket(ClothingItem clothingItem)
     {
         basket.Add(clothingItem);
@@ -63,6 +107,7 @@ public class ShopManager : MonoBehaviour
 
         Debug.Log(clothingItem.itemName + " added to basket");
         Debug.Log("Total basket price is " + basketTotalPrice);
+        OnBasketUpdated?.Invoke(basket.Count);
     }
 
     public void TryToBuyItemsInBasket()
@@ -89,6 +134,7 @@ public class ShopManager : MonoBehaviour
         }
         
         basket.Clear();
+        OnBasketUpdated?.Invoke(basket.Count);
         basketTotalPrice = 0;
     }
 }
