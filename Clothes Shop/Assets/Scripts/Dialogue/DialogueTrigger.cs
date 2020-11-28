@@ -6,16 +6,23 @@ public class DialogueTrigger : MonoBehaviour
 {
     [SerializeField] private Dialogue dialogue;
 
+    private DialogueManager dialogueManager;
+
+    private void Start()
+    {
+        dialogueManager = FindObjectOfType<DialogueManager>();
+    }
+
     public void TriggerDialogue()
     {
         if(!dialogue.hasStarted)
         {
             dialogue.hasStarted = true;
-            FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+            dialogueManager.StartDialogue(dialogue);
         }
         else
         {
-            if (FindObjectOfType<DialogueManager>().DisplayNextSentence())
+            if (dialogueManager.DisplayNextSentence())
             {
                 dialogue.hasStarted = false;
             }

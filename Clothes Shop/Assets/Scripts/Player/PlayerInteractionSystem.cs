@@ -16,7 +16,6 @@ public class PlayerInteractionSystem : MonoBehaviour
             bool isInRightDirection = false;
             foreach (Vector2 interactionDirection in currentInteractable.GetInteractionDirections())
             {
-                Debug.Log("checked");
                 if (interactionDirection == movement.GetCurrentDirection())
                 {
                     isInRightDirection = true;
