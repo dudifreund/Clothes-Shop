@@ -15,23 +15,18 @@ public class DialogueTrigger : MonoBehaviour
 
     public void TriggerDialogue()
     {
-        if(!dialogue.hasStarted)
+        if(!dialogueManager.hasStarted)
         {
-            dialogue.hasStarted = true;
             dialogueManager.StartDialogue(dialogue);
         }
         else
         {
-            if (dialogueManager.DisplayNextSentence())
-            {
-                dialogue.hasStarted = false;
-            }
+            dialogueManager.DisplayNextSentence();
         }
     }
 
     public void EndDialogue()
     {
-        dialogue.hasStarted = false;
-        FindObjectOfType<DialogueManager>().EndDialogue();
+        dialogueManager.EndDialogue();
     }
 }

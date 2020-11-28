@@ -7,9 +7,12 @@ using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
+    [SerializeField] private GameObject choisePanel;
     [SerializeField] private TMP_Text nameText;
     [SerializeField] private TMP_Text dialogueText;
     [SerializeField] private Animator animator;
+    
+    public bool hasStarted = false;
 
     private Queue<string> sentences;
     
@@ -20,6 +23,8 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
+        hasStarted = true;
+
         nameText.text = "";
         dialogueText.text = "";
 
@@ -37,18 +42,23 @@ public class DialogueManager : MonoBehaviour
         Invoke(nameof(DisplayNextSentence), 0.4f);
     }
 
-    public bool DisplayNextSentence() // returns true if dialogue has ended
+    public void DisplayNextSentence()
     {
+        if (choisePanel.activeSelf) { return; }
+
         if (sentences.Count == 0)
         {
-            EndDialogue();
-            return true;
+            StopAllCoroutines();
+            dialogueText.text = "";
+            nameText.text = "";
+            choisePanel.SetActive(true);
+            
+            return;
         }
 
         string sentence = sentences.Dequeue();
         StopAllCoroutines();
         StartCoroutine(TypeSentence(sentence));
-        return false;
     }
 
     private IEnumerator TypeSentence(string sentence)
@@ -65,6 +75,8 @@ public class DialogueManager : MonoBehaviour
     public void EndDialogue()
     {
         StopAllCoroutines();
+        choisePanel.SetActive(false);
+        hasStarted = false;
         animator.SetBool("isShown", false);
     }
 }

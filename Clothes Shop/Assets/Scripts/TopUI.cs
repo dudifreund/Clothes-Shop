@@ -7,6 +7,7 @@ public class TopUI : MonoBehaviour
 {
     [SerializeField] private TMP_Text moneyText;
     [SerializeField] private TMP_Text basketCountText;
+    [SerializeField] private TMP_Text itemsCountText;
 
     PlayerState playerState;
     ShopManager shopManager;
@@ -17,12 +18,14 @@ public class TopUI : MonoBehaviour
         shopManager = FindObjectOfType<ShopManager>();
 
         playerState.OnMoneyUpdated += OnMoneyUpdatedHandler;
+        playerState.OnItemsUpdated += OnItemsUpdatedHandler;
         shopManager.OnBasketUpdated += OnBasketUpdatedHandler;
     }
 
     private void OnDestroy()
     {
         playerState.OnMoneyUpdated -= OnMoneyUpdatedHandler;
+        playerState.OnItemsUpdated -= OnItemsUpdatedHandler;
         shopManager.OnBasketUpdated -= OnBasketUpdatedHandler;
     }
 
@@ -34,5 +37,10 @@ public class TopUI : MonoBehaviour
     private void OnBasketUpdatedHandler(int newBasketCount)
     {
         basketCountText.text = newBasketCount.ToString();
+    }
+    
+    private void OnItemsUpdatedHandler(int newItemsCount)
+    {
+        itemsCountText.text = newItemsCount.ToString();
     }
 }

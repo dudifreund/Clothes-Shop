@@ -12,6 +12,7 @@ public class Movement : MonoBehaviour
     private Vector2 currentMovement;
     private Vector2 currentDirection = new Vector2(0f, -1f);
     private bool isWalking = false;
+    private bool isUIShown = false;
     
     private void Update()
     {
@@ -25,6 +26,8 @@ public class Movement : MonoBehaviour
 
     private void GetInput()
     {
+        if (isUIShown) { return; }
+
         currentMovement.x = Input.GetAxisRaw("Horizontal");
         currentMovement.y = Input.GetAxisRaw("Vertical");
 
@@ -58,11 +61,17 @@ public class Movement : MonoBehaviour
 
     private void Move()
     {
+        if (isUIShown) { return; }
         rb.MovePosition(rb.position + currentMovement * movementSpeed * Time.fixedDeltaTime); 
     }
 
     public Vector2 GetCurrentDirection()
     {
         return currentDirection;
+    }
+
+    public void SetIsUIShown(bool value)
+    {
+        isUIShown = value;
     }
 }

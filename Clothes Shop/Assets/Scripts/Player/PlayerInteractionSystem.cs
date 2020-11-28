@@ -7,11 +7,15 @@ public class PlayerInteractionSystem : MonoBehaviour
     [SerializeField] private Movement movement;
     [SerializeField] private Interactable currentInteractable = null;
 
+    private bool isUIShown = false;
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (currentInteractable == null) { return; }
+
+            if (isUIShown) { return; }
 
             bool isInRightDirection = false;
             foreach (Vector2 interactionDirection in currentInteractable.GetInteractionDirections())
@@ -37,5 +41,10 @@ public class PlayerInteractionSystem : MonoBehaviour
     public void ResetCurrentInteractable()
     {
         currentInteractable = null;
+    }
+
+    public void SetIsUIShown(bool value)
+    {
+        isUIShown = value;
     }
 }

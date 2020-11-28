@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using TMPro;
 
 public class ShopManager : MonoBehaviour
 {
@@ -12,7 +13,11 @@ public class ShopManager : MonoBehaviour
     [SerializeField] Transform shopBoxContentTransform;
     [SerializeField] Transform basketBoxContentTransform;
     [SerializeField] GameObject itemPrefab;
-
+    [SerializeField] GameObject feedbackPopoup;
+    [SerializeField] TMP_Text feedbackText;
+    [SerializeField] private PlayerInteractionSystem playerInteractionSystem;
+    [SerializeField] private Movement movement;
+    
     public event Action<int> OnBasketUpdated;
     
     private PlayerState playerState;
@@ -94,10 +99,6 @@ public class ShopManager : MonoBehaviour
     public void CloseBasket()
     {
         basketAnimator.SetBool("isShown", false);
-
-        //ClearItemsInBasket();
-
-        //PopulateItemsInBasket(clothes);
     }
     
     public void AddItemToBasket(ClothingItem clothingItem)
@@ -114,20 +115,29 @@ public class ShopManager : MonoBehaviour
     {
         if (basket.Count == 0)
         {
-            Debug.Log("You have no items in your basket");
+            feedbackPopoup.SetActive(true);
+            playerInteractionSystem.SetIsUIShown(true);
+            movement.SetIsUIShown(true);
+            feedbackText.text = "You have no items in your basket";
             return;
         }
 
         if (playerState.GetPlayerMoney() < basketTotalPrice)
         {
-            Debug.Log("You don't have enough money");
+            feedbackPopoup.SetActive(true);
+            playerInteractionSystem.SetIsUIShown(true);
+            movement.SetIsUIShown(true);
+            feedbackText.text = "You don't have enough money";
             return;
         }
 
         playerState.AddPlayerMoney(-basketTotalPrice);
 
-        Debug.Log("You paid for your basket");
-
+        feedbackPopoup.SetActive(true);
+        playerInteractionSystem.SetIsUIShown(true);
+        movement.SetIsUIShown(true);
+        feedbackText.text = "Successfully purchased!";
+        
         foreach (ClothingItem item in basket)
         {
             playerState.AddItemToPlayerItems(item);
