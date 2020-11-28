@@ -10,6 +10,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private Animator animator;
 
     private Vector2 currentMovement;
+    private Vector2 currentDirection = new Vector2(0f, -1f);
     private bool isWalking = false;
     
     private void Update()
@@ -43,6 +44,7 @@ public class Movement : MonoBehaviour
 
             animator.SetFloat("Xmovement", currentMovement.x);
             animator.SetFloat("Ymovement", currentMovement.y);
+            currentDirection = currentMovement;
         }
         else
         {
@@ -57,5 +59,10 @@ public class Movement : MonoBehaviour
     private void Move()
     {
         rb.MovePosition(rb.position + currentMovement * movementSpeed * Time.fixedDeltaTime); 
+    }
+
+    public Vector2 GetCurrentDirection()
+    {
+        return currentDirection;
     }
 }
