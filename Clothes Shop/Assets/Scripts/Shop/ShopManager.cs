@@ -35,9 +35,18 @@ public class ShopManager : MonoBehaviour
     {
         shopAnimator.SetBool("isShown", true);
 
+        ResetShopScrollPosition();
+
         ClearItemsInShop();
 
         PopulateItemsInShop(clothes);
+    }
+
+    private void ResetShopScrollPosition()
+    {
+        RectTransform shopRectTransform = (RectTransform)shopBoxContentTransform;
+        shopRectTransform.offsetMin = new Vector2(shopRectTransform.offsetMin.x, 0f);
+        shopRectTransform.offsetMax = new Vector2(shopRectTransform.offsetMax.x, 0f);
     }
     
     private void ClearItemsInShop()
@@ -70,9 +79,18 @@ public class ShopManager : MonoBehaviour
     {
         basketAnimator.SetBool("isShown", true);
 
+        ResetBasketScrollPosition();
+
         ClearItemsInBasket();
 
         PopulateItemsInBasket();
+    }
+
+    private void ResetBasketScrollPosition()
+    {
+        RectTransform basketRectTransform = (RectTransform)basketBoxContentTransform;
+        basketRectTransform.offsetMin = new Vector2(basketRectTransform.offsetMin.x, 0f);
+        basketRectTransform.offsetMax = new Vector2(basketRectTransform.offsetMax.x, 0f);
     }
 
     private void ClearItemsInBasket()
@@ -89,8 +107,12 @@ public class ShopManager : MonoBehaviour
         {
             GameObject instantiatedItem = Instantiate(itemPrefab, Vector3.zero, Quaternion.identity);
             instantiatedItem.transform.SetParent(basketBoxContentTransform);
+
             ItemButton itemButton = instantiatedItem. GetComponent<ItemButton>();
             Destroy(itemButton);
+            Button button = instantiatedItem.GetComponent<Button>();
+            Destroy(button);
+
             ItemUI itemUI = instantiatedItem.transform.GetComponent<ItemUI>();
             itemUI.GetImageComponent().sprite = item.itemIcon;
             itemUI.GetpriceText().text = item.itemPrice.ToString();

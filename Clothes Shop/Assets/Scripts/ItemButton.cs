@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ItemButton : MonoBehaviour, IPointerDownHandler
+public class ItemButton : MonoBehaviour/*, IPointerDownHandler*/
 {
     private ShopManager shopManager;
     private ClothingItem clothingItem;
@@ -13,10 +13,17 @@ public class ItemButton : MonoBehaviour, IPointerDownHandler
     {
         shopManager = FindObjectOfType<ShopManager>();
     }
+
+    public void AddItemToBasket()
+    {
+        shopManager.AddItemToBasket(clothingItem);
+    }
+    /*
     public void OnPointerDown(PointerEventData eventData)
     {
         shopManager.AddItemToBasket(clothingItem);
     }
+    */
     
     public void SetClothingItem(ClothingItem clothingItemToSet)
     {

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerState : MonoBehaviour
 {
@@ -38,9 +39,18 @@ public class PlayerState : MonoBehaviour
     {
         itemsAnimator.SetBool("isShown", true);
 
+        ResetItemsScrollPosition();
+
         ClearItemsInItems();
 
         PopulateItemsInItems();
+    }
+
+    private void ResetItemsScrollPosition()
+    {
+        RectTransform itemsRectTransform = (RectTransform)itemsBoxContentTransform;
+        itemsRectTransform.offsetMin = new Vector2(itemsRectTransform.offsetMin.x, 0f);
+        itemsRectTransform.offsetMax = new Vector2(itemsRectTransform.offsetMax.x, 0f);
     }
 
     private void ClearItemsInItems()
@@ -57,8 +67,12 @@ public class PlayerState : MonoBehaviour
         {
             GameObject instantiatedItem = Instantiate(itemPrefab, Vector3.zero, Quaternion.identity);
             instantiatedItem.transform.SetParent(itemsBoxContentTransform);
+            
             ItemButton itemButton = instantiatedItem.GetComponent<ItemButton>();
             Destroy(itemButton);
+            Button button = instantiatedItem.GetComponent<Button>();
+            Destroy(button);
+            
             ItemUI itemUI = instantiatedItem.transform.GetComponent<ItemUI>();
             itemUI.GetImageComponent().sprite = item.itemIcon;
             itemUI.GetpriceText().text = "";
