@@ -36,7 +36,7 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("Sound: " + soundName + " not found!");
             return;
         }
-
+        
         s.source.Play();
     }
 }
