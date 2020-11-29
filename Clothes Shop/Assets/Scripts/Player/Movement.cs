@@ -26,7 +26,17 @@ public class Movement : MonoBehaviour
 
     private void GetInput()
     {
-        if (popupManager.GetIsPopupOpen()) { return; }
+        if (popupManager.GetIsPopupOpen())
+        {
+            isWalking = false;
+            animator.SetBool("isWalking", isWalking);
+            /*
+            currentMovement = Vector2.zero;
+            animator.SetFloat("Xmovement", currentMovement.x);
+            animator.SetFloat("Ymovement", currentMovement.y);
+            */
+            return;
+        }
 
         currentMovement.x = Input.GetAxisRaw("Horizontal");
         currentMovement.y = Input.GetAxisRaw("Vertical");
