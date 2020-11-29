@@ -70,7 +70,8 @@ public class ShopManager : MonoBehaviour
             instantiatedItem.GetComponent<ItemButton>().SetClothingItem(item);
             ItemUI itemUI = instantiatedItem.transform.GetComponent<ItemUI>();
             itemUI.GetImageComponent().sprite = item.itemIcon;
-            itemUI.GetpriceText().text = item.itemPrice.ToString();
+            itemUI.GetPriceText().text = item.itemPrice.ToString();
+            itemUI.GetNameText().text = item.itemName;
         }
     }
 
@@ -121,7 +122,8 @@ public class ShopManager : MonoBehaviour
 
             ItemUI itemUI = instantiatedItem.transform.GetComponent<ItemUI>();
             itemUI.GetImageComponent().sprite = item.itemIcon;
-            itemUI.GetpriceText().text = item.itemPrice.ToString();
+            itemUI.GetPriceText().text = item.itemPrice.ToString();
+            itemUI.GetNameText().text = item.itemName;
         }
     }
 
@@ -134,9 +136,7 @@ public class ShopManager : MonoBehaviour
     {
         basket.Add(clothingItem);
         basketTotalPrice += clothingItem.itemPrice;
-
-        Debug.Log(clothingItem.itemName + " added to basket");
-        Debug.Log("Total basket price is " + basketTotalPrice);
+        
         OnBasketUpdated?.Invoke(basket.Count);
     }
 
@@ -169,8 +169,17 @@ public class ShopManager : MonoBehaviour
             playerState.AddItemToPlayerItems(item);
         }
         
+        ClearBasket();
+    }
+
+    public void ClearBasket()
+    {
         basket.Clear();
         OnBasketUpdated?.Invoke(basket.Count);
         basketTotalPrice = 0;
+
+        ClearItemsInBasket();
+
+        basketTotalText.text = basketTotalPrice.ToString() + " $";
     }
 }

@@ -75,7 +75,8 @@ public class PlayerState : MonoBehaviour
             
             ItemUI itemUI = instantiatedItem.transform.GetComponent<ItemUI>();
             itemUI.GetImageComponent().sprite = item.itemIcon;
-            itemUI.GetpriceText().text = "";
+            itemUI.GetPriceText().text = "";
+            itemUI.GetNameText().text = item.itemName;
         }
     }
 
