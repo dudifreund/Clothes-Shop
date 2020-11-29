@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ShopTrigger : MonoBehaviour
 {
+    [SerializeField] private string shopTitle;
     [SerializeField] private ClothingItem[] clothes;
     [SerializeField] private PopupManager popupManager;
     
@@ -27,7 +28,7 @@ public class ShopTrigger : MonoBehaviour
 
         isOpen = true;
         popupManager.SetIsPopupOpen(true);
-        FindObjectOfType<ShopManager>().OpenShop(clothes);
+        FindObjectOfType<ShopManager>().OpenShop(clothes, shopTitle);
     }
 
     public void CloseShop()

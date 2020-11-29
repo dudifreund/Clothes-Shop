@@ -16,6 +16,7 @@ public class ShopManager : MonoBehaviour
     [SerializeField] GameObject feedbackPopoup;
     [SerializeField] TMP_Text feedbackText;
     [SerializeField] TMP_Text basketTotalText;
+    [SerializeField] TMP_Text shopTitleText;
     [SerializeField] private PlayerInteractionSystem playerInteractionSystem;
     [SerializeField] private Movement movement;
     [SerializeField] private PopupManager popupManager;
@@ -32,7 +33,7 @@ public class ShopManager : MonoBehaviour
         playerState = FindObjectOfType<PlayerState>();
     }
     
-    public void OpenShop(ClothingItem[] clothes)
+    public void OpenShop(ClothingItem[] clothes, string shopTitle)
     {
         shopAnimator.SetBool("isShown", true);
 
@@ -41,6 +42,8 @@ public class ShopManager : MonoBehaviour
         ClearItemsInShop();
 
         PopulateItemsInShop(clothes);
+
+        shopTitleText.text = shopTitle;
     }
 
     private void ResetShopScrollPosition()
