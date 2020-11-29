@@ -15,6 +15,7 @@ public class ShopManager : MonoBehaviour
     [SerializeField] GameObject itemPrefab;
     [SerializeField] GameObject feedbackPopoup;
     [SerializeField] TMP_Text feedbackText;
+    [SerializeField] TMP_Text basketTotalText;
     [SerializeField] private PlayerInteractionSystem playerInteractionSystem;
     [SerializeField] private Movement movement;
     [SerializeField] private PopupManager popupManager;
@@ -84,6 +85,8 @@ public class ShopManager : MonoBehaviour
         ClearItemsInBasket();
 
         PopulateItemsInBasket();
+
+        basketTotalText.text = basketTotalPrice.ToString() + " $";
     }
 
     private void ResetBasketScrollPosition()
